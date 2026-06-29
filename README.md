@@ -1,99 +1,127 @@
 # 🧤 AI-Powered Bengali Sign Language Recognition System
 
-[![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/)
-[![XGBoost](https://img.shields.io/badge/XGBoost-1.7.0-orange.svg)](https://xgboost.readthedocs.io/)
-[![ESP32](https://img.shields.io/badge/ESP32-PlatformIO-red.svg)](https://www.espressif.com/)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+<div align="center">
 
-> 🎯 Real-time Bengali Sign Language (BaSL) Recognition using Sensor Glove & XGBoost
+[![Python](https://img.shields.io/badge/Python-3.8+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![XGBoost](https://img.shields.io/badge/XGBoost-1.7.0-F7931E?style=for-the-badge&logo=xgboost&logoColor=white)](https://xgboost.readthedocs.io/)
+[![ESP32](https://img.shields.io/badge/ESP32-PlatformIO-E7352C?style=for-the-badge&logo=espressif&logoColor=white)](https://www.espressif.com/)
+[![License](https://img.shields.io/badge/License-MIT-00C853?style=for-the-badge&logo=opensourceinitiative&logoColor=white)](LICENSE)
+[![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-00BFFF?style=for-the-badge&logo=pullrequest&logoColor=white)](CONTRIBUTING.md)
 
----
+### 🎯 Real-time Bengali Sign Language (BaSL) Recognition using Sensor Glove & XGBoost
 
-## 📋 Table of Contents
-- [Project Overview](#-project-overview)
-- [Problem Statement](#-problem-statement)
-- [Hardware Components](#-hardware-components)
-- [Dataset](#-dataset)
-- [Machine Learning Pipeline](#-machine-learning-pipeline)
-- [Results](#-results)
-- [Deployment on ESP32](#-deployment-on-esp32)
-- [Installation](#-installation)
-- [Usage](#-usage)
-- [Repository Structure](#-repository-structure)
-- [Future Work](#-future-work)
-- [Contributing](#-contributing)
-- [License](#-license)
-- [Contact](#-contact)
+[🚀 Quick Start](#-quick-start) • [📖 Documentation](#-documentation) • [🤖 How It Works](#-how-it-works) • [📊 Results](#-results) • [🤝 Contributing](#-contributing)
+
+</div>
 
 ---
 
-## 🎯 Project Overview
+## 📸 Project Demo
 
-This project implements an **AI-based sensory glove system** that recognizes **Bengali Sign Language (BaSL)** gestures and converts them into text/speech. The system uses a combination of **flex sensors, accelerometer, and gyroscope** embedded in a glove to capture hand gestures, processes the sensor data using **machine learning (XGBoost)**, and provides real-time sign language recognition.
+<div align="center">
+  <img src="https://i.imgur.com/placeholder_demo.gif" alt="Project Demo" width="700"/>
+  <p><i>Real-time Bengali Sign Language Recognition in Action</i></p>
+</div>
 
-### 🌟 Key Features
-- ✅ Real-time Bengali Sign Language recognition
-- ✅ Affordable hardware (< $140)
-- ✅ User-independent (works with different signers)
-- ✅ Edge AI deployment (ESP32)
-- ✅ 4+ hours battery life
-- ✅ 90-93% recognition accuracy
-- ✅ Supports 11 Bengali words (expandable)
+---
+
+## ✨ Highlights
+
+<table>
+  <tr>
+    <td align="center" width="25%">
+      <b>⚡ Real-time</b><br><br>
+      <img src="https://img.icons8.com/fluency/48/000000/real-time-protection.png" alt="Real-time" width="48"/>
+      <br><br>
+      <sub>Instant gesture recognition</sub>
+    </td>
+    <td align="center" width="25%">
+      <b>💰 Affordable</b><br><br>
+      <img src="https://img.icons8.com/fluency/48/000000/money-bag.png" alt="Affordable" width="48"/>
+      <br><br>
+      <sub>Less than $140 total cost</sub>
+    </td>
+    <td align="center" width="25%">
+      <b>🤖 Edge AI</b><br><br>
+      <img src="https://img.icons8.com/fluency/48/000000/artificial-intelligence.png" alt="Edge AI" width="48"/>
+      <br><br>
+      <sub>Runs entirely on ESP32</sub>
+    </td>
+    <td align="center" width="25%">
+      <b>🔋 Long Battery</b><br><br>
+      <img src="https://img.icons8.com/fluency/48/000000/charging-battery.png" alt="Battery" width="48"/>
+      <br><br>
+      <sub>4+ hours of continuous use</sub>
+    </td>
+  </tr>
+</table>
 
 ---
 
 ## 🎯 Problem Statement
 
-**Communication barrier** for speech-disabled individuals in Bangladesh:
+<div align="center">
 
-- **~3 million people** (0.32% of population) experience speech disability
-- **>55%** have received no formal education
-- Only **0.43%** use assistive communication devices due to high costs
-- **Solution**: An affordable, wearable device that converts Bengali Sign Language into text/speech in real-time.
+### **Breaking Communication Barriers for Speech-Disabled Individuals in Bangladesh**
+
+</div>
+
+> 📊 **Statistics that Matter:**
+> - **~3 million people** (0.32% of population) experience speech disability
+> - **>55%** have received no formal education
+> - Only **0.43%** use assistive communication devices due to high costs
+
+<div align="center">
+  <img src="https://img.shields.io/badge/Our_Solution-Affordable_Wearable_Device-blue?style=for-the-badge" alt="Solution"/>
+</div>
 
 ---
 
 ## 🛠️ Hardware Components
 
 ### Sensor Glove Architecture
-┌─────────────────────────────────────────────────────────────┐
-│ SENSOR GLOVE SYSTEM │
-├─────────────────────────────────────────────────────────────┤
-│ ┌──────────────┐ ┌──────────────┐ ┌──────────────┐ │
-│ │ Flex Sensor 1│ │ Flex Sensor 2│ │ Flex Sensor 3│ │
-│ │ (Index) │ │ (Middle) │ │ (Ring) │ │
-│ └──────────────┘ └──────────────┘ └──────────────┘ │
-│ ┌──────────────┐ ┌──────────────┐ ┌──────────────┐ │
-│ │ Flex Sensor 4│ │ Flex Sensor 5│ │ MPU6050 │ │
-│ │ (Pinky) │ │ (Thumb) │ │ (IMU) │ │
-│ └──────────────┘ └──────────────┘ └──────────────┘ │
-│ │
-│ ┌──────────────┐ ┌──────────────┐ ┌──────────────┐ │
-│ │ ESP32 │ │ MAX98357A │ │ Speaker │ │
-│ │ (Processor) │ │ (Amplifier) │ │ (Audio) │ │
-│ └──────────────┘ └──────────────┘ └──────────────┘ │
-│ │
-│ ┌────────────────────────────────────────────────────┐ │
-│ │ Battery (6000mAh Li-Ion) │ │
-│ └────────────────────────────────────────────────────┘ │
-└─────────────────────────────────────────────────────────────┘
 
+```
+┌─────────────────────────────────────────────────────────────┐
+│                      SENSOR GLOVE SYSTEM                    │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│  ┌──────────────┐ ┌──────────────┐ ┌──────────────┐        │
+│  │ Flex Sensor 1│ │ Flex Sensor 2│ │ Flex Sensor 3│        │
+│  │   (Index)    │ │  (Middle)    │ │   (Ring)     │        │
+│  └──────────────┘ └──────────────┘ └──────────────┘        │
+│  ┌──────────────┐ ┌──────────────┐ ┌──────────────┐        │
+│  │ Flex Sensor 4│ │ Flex Sensor 5│ │   MPU6050    │        │
+│  │   (Pinky)    │ │   (Thumb)    │ │     (IMU)    │        │
+│  └──────────────┘ └──────────────┘ └──────────────┘        │
+│                                                             │
+│  ┌──────────────┐ ┌──────────────┐ ┌──────────────┐        │
+│  │    ESP32     │ │  MAX98357A   │ │   Speaker    │        │
+│  │ (Processor)  │ │ (Amplifier)  │ │   (Audio)    │        │
+│  └──────────────┘ └──────────────┘ └──────────────┘        │
+│                                                             │
+│  ┌────────────────────────────────────────────────────┐    │
+│  │          Battery (6000mAh Li-Ion)                  │    │
+│  └────────────────────────────────────────────────────┘    │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+```
 
 ### Component List
 
-| Component | Quantity | Purpose |
-|-----------|----------|---------|
-| Flex Sensors | 5 | Measure finger bending angles |
-| MPU6050 (IMU) | 1 | Captures hand movement & orientation |
-| ESP32 | 1 | Main processing unit (Edge AI) |
-| MAX98357A | 1 | Audio amplifier for speech output |
-| Speaker | 1 | Voice output |
-| Push Button | 1 | Start/Stop recording |
-| Li-Ion Battery | 2 | Power source (6000mAh) |
-| Resistors (10kΩ) | 5 | Voltage divider for flex sensors |
+| Component | Quantity | Purpose | Image |
+|-----------|----------|---------|-------|
+| Flex Sensors | 5 | Measure finger bending angles | 🖐️ |
+| MPU6050 (IMU) | 1 | Captures hand movement & orientation | 🧭 |
+| ESP32 | 1 | Main processing unit (Edge AI) | 🧠 |
+| MAX98357A | 1 | Audio amplifier for speech output | 🔊 |
+| Speaker | 1 | Voice output | 📢 |
+| Push Button | 1 | Start/Stop recording | 🔘 |
+| Li-Ion Battery | 2 | Power source (6000mAh) | 🔋 |
+| Resistors (10kΩ) | 5 | Voltage divider for flex sensors | ⚡ |
 
-### Sensor Specifications
+<details>
+<summary>🔍 Click to expand Sensor Specifications</summary>
 
 **Flex Sensors:**
 - Resistance: 10kΩ (unbent) to 40kΩ (fully bent)
@@ -107,7 +135,7 @@ This project implements an **AI-based sensory glove system** that recognizes **B
 - Low power consumption (3.6mA)
 - 16-bit digital output
 
-### Data Captured (11 Features)
+</details>
 
 ---
 
@@ -115,11 +143,13 @@ This project implements an **AI-based sensory glove system** that recognizes **B
 
 ### Data Collection Protocol
 
-- **11 Bengali Words** (See table below)
-- **4 Participants** (Diverse hand shapes)
-- **5 Repetitions** per person per word
-- **20 Timesteps** per sign (each timestep captures 11 sensor readings)
-- **Total**: 220 samples (20 samples per word)
+```mermaid
+graph LR
+    A[11 Bengali Words] --> B[4 Participants]
+    B --> C[5 Repetitions per person per word]
+    C --> D[20 Timesteps per sign]
+    D --> E[220 samples total]
+```
 
 ### Bengali Words Supported
 
@@ -138,73 +168,132 @@ This project implements an **AI-based sensory glove system** that recognizes **B
 | 10 | হাসপাতাল | Hospital | 31 | আমি এখানে | I am here |
 
 ### Dataset Statistics
-Total entries: 4,400
-Unique samples: 220 (20 per word)
-Timesteps per sample: 20
-Features per timestep: 11
-Samples per person: 55
 
+```
+┌─────────────────────────────────────────────────┐
+│              DATASET STATISTICS                 │
+├─────────────────────────────────────────────────┤
+│ Total entries:        4,400                     │
+│ Unique samples:       220 (20 per word)         │
+│ Timesteps per sample: 20                        │
+│ Features per timestep: 11                       │
+│ Samples per person:   55                        │
+└─────────────────────────────────────────────────┘
+```
 
-### Sample Data Visualization
+<details>
+<summary>📊 Click to view Sample Data Visualization</summary>
 
+```
 Sample 1 (salam - Person 1):
 ┌─────────────────────────────────────────────────────────┐
 │ Timestep │ flex1 │ flex2 │ flex3 │ flex4 │ flex5 │ ...│
 ├─────────┼───────┼───────┼───────┼───────┼───────┼─────┤
-│ 0 │ 4046 │ 3409 │ 3721 │ 3479 │ 3581 │ ...│
-│ 1 │ 4095 │ 3417 │ 3733 │ 3498 │ 3611 │ ...│
-│ 2 │ 4095 │ 3414 │ 3749 │ 3502 │ 3605 │ ...│
-│ ... │ ... │ ... │ ... │ ... │ ... │ ...│
-│ 19 │ 3991 │ 3316 │ 3736 │ 3469 │ 3631 │ ...│
+│    0    │ 4046  │ 3409  │ 3721  │ 3479  │ 3581  │ ...│
+│    1    │ 4095  │ 3417  │ 3733  │ 3498  │ 3611  │ ...│
+│    2    │ 4095  │ 3414  │ 3749  │ 3502  │ 3605  │ ...│
+│   ...   │  ...  │  ...  │  ...  │  ...  │  ...  │ ...│
+│   19    │ 3991  │ 3316  │ 3736  │ 3469  │ 3631  │ ...│
 └─────────┴───────┴───────┴───────┴───────┴───────┴─────┘
+```
 
-
+</details>
 
 ---
 
-## 🤖 Machine Learning Pipeline
+## 🤖 How It Works
 
-### 1. Data Preprocessing
+```mermaid
+flowchart TD
+    A[Sensor Input] --> B[Data Preprocessing]
+    B --> C[Feature Extraction]
+    C --> D[XGBoost Model]
+    D --> E[Prediction]
+    E --> F[Audio Output]
+    
+    subgraph A [Sensor Input]
+        A1[Flex Sensors]
+        A2[MPU6050 IMU]
+    end
+    
+    subgraph B [Data Preprocessing]
+        B1[Buffer 20 Timesteps]
+        B2[Flatten to 220 Features]
+        B3[Standard Scaling]
+    end
+    
+    subgraph C [Feature Extraction]
+        C1[Statistical Features]
+        C2[Temporal Features]
+    end
+    
+    subgraph D [XGBoost Model]
+        D1[Decision Trees]
+        D2[Gradient Boosting]
+    end
+    
+    subgraph E [Prediction]
+        E1[Class Index]
+        E2[Map to Bengali Word]
+    end
+    
+    subgraph F [Audio Output]
+        F1[MAX98357A Amplifier]
+        F2[Speaker]
+    end
+```
+
+### Machine Learning Pipeline
+
+<details>
+<summary>🔧 Click to view Technical Details</summary>
+
+#### 1. Data Preprocessing
 
 ```python
 # Sample shape: (20 timesteps × 11 features)
 # Flattened: 220 features per sample
 X_train shape: (176, 220)  # 80% training
 X_test shape: (44, 220)    # 20% testing
+```
 
+#### 2. Feature Engineering
 
-2. Feature Engineering
-Flatten each sample from (20×11) to (220,)
+- Flatten each sample from (20×11) to (220,)
+- Standard Scaling using StandardScaler
 
-Standard Scaling using StandardScaler
+#### 3. Model: XGBoost Classifier
 
-3. Model: XGBoost Classifier
-Why XGBoost?
+**Why XGBoost?**
 
-✅ Works well with small datasets (220 samples)
+- ✅ Works well with small datasets (220 samples)
+- ✅ High accuracy (90%+ achieved)
+- ✅ Interpretable (feature importance)
+- ✅ Fast inference (suitable for edge devices)
+- ✅ Easy to deploy on ESP32 (C conversion)
 
-✅ High accuracy (90%+ achieved)
+</details>
 
-✅ Interpretable (feature importance)
+---
 
-✅ Fast inference (suitable for edge devices)
+## 📈 Results
 
-✅ Easy to deploy on ESP32 (C conversion)
+### Model Performance Comparison
 
+| Metric | XGBoost | CNN (Baseline) | CNN+LSTM |
+|--------|---------|----------------|----------|
+| Parameters | ~40,000 | 40,105 | 75,977 |
+| Training Time | 2 seconds | 5 minutes | 10 minutes |
+| Inference Time | 1ms | 10ms | 20ms |
+| Accuracy | 90-93% | 90.34% | 94.73% |
+| F1-Score | 0.88-0.92 | 0.89 | 0.92 |
+| ESP32 Deployment | ✅ Easy | ❌ Complex | ❌ Complex |
 
-📊 Results
-Model Performance Comparison
-Metric	XGBoost	CNN (Baseline)	CNN+LSTM
-Parameters	~40,000	40,105	75,977
-Training Time	2 seconds	5 minutes	10 minutes
-Inference Time	1ms	10ms	20ms
-Accuracy	90-93%	90.34%	94.73%
-F1-Score	0.88-0.92	0.89	0.92
-ESP32 Deployment	✅ Easy	❌ Complex	❌ Complex
+### Classification Report
 
-
-
+```
                 precision    recall  f1-score   support
+
     achen         0.89       0.85      0.87         4
      achi         0.92       0.88      0.90         4
       ami         0.90       0.92      0.91         4
@@ -220,14 +309,17 @@ dhonnobad         0.85       0.88      0.86         4
     accuracy                         0.90        44
    macro avg       0.89       0.89      0.89        44
 weighted avg       0.89       0.89      0.89        44
+```
 
+### Deployment on ESP32
 
-
+```bash
 # Convert XGBoost model to C code for ESP32
 pip install m2cgen
 python convert_to_c.py --model models/xgboost_model.pkl --output esp32_firmware/model_data.c
+```
 
-
+```
 ┌─────────────────────────────────────────────────────────────┐
 │                    ESP32 INFERENCE PIPELINE                 │
 ├─────────────────────────────────────────────────────────────┤
@@ -255,7 +347,12 @@ python convert_to_c.py --model models/xgboost_model.pkl --output esp32_firmware/
 │     └── TTS or pre-recorded audio                          │
 │                                                             │
 └─────────────────────────────────────────────────────────────┘
+```
 
+<details>
+<summary>🔌 Click to view ESP32 Pin Mapping</summary>
+
+```cpp
 // ESP32 Pin Mapping
 #define FLEX1_PIN   34  // Analog input
 #define FLEX2_PIN   35  // Analog input
@@ -272,53 +369,82 @@ python convert_to_c.py --model models/xgboost_model.pkl --output esp32_firmware/
 #define I2S_BCLK    26  // Bit Clock
 #define I2S_LRC     25  // Left/Right Clock
 #define I2S_DOUT    27  // Data Out
+```
 
-🔧 Installation
-1. Clone the Repository
-bash
+</details>
+
+---
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+- Python 3.8+
+- PlatformIO (for ESP32)
+- Hardware components (see [Hardware Components](#-hardware-components))
+
+### Installation
+
+1. **Clone the Repository**
+
+```bash
 git clone https://github.com/yourusername/bengali-sign-language-recognition.git
 cd bengali-sign-language-recognition
-2. Install Python Dependencies
-bash
+```
+
+2. **Install Python Dependencies**
+
+```bash
 pip install -r requirements.txt
-3. Install PlatformIO (for ESP32)
-bash
+```
+
+3. **Install PlatformIO (for ESP32)**
+
+```bash
 # Windows
 pip install platformio
 
 # Mac/Linux
 curl -fsSL https://raw.githubusercontent.com/platformio/platformio/master/scripts/get-platformio.py | python3
-4. Hardware Assembly
-Sew flex sensors onto glove fingers
+```
 
-Mount MPU6050 on glove back (between knuckles and wrist)
+4. **Hardware Assembly**
 
-Mount ESP32 on glove wrist area
+- Sew flex sensors onto glove fingers
+- Mount MPU6050 on glove back (between knuckles and wrist)
+- Mount ESP32 on glove wrist area
+- Connect MAX98357A and speaker
+- Connect battery with voltage regulators (LM2590, XL6009)
+- Wire all components according to schematic
 
-Connect MAX98357A and speaker
+5. **Upload Firmware to ESP32**
 
-Connect battery with voltage regulators (LM2590, XL6009)
-
-Wire all components according to schematic
-
-5. Upload Firmware to ESP32
-bash
+```bash
 cd esp32_firmware
 platformio run --target upload
-💻 Usage
-1. Data Collection Mode
-bash
+```
+
+---
+
+## 💻 Usage
+
+### 1. Data Collection Mode
+
+```bash
 # Collect data from sensor glove
 python src/data_collection.py --port COM3 --output data/raw/
+```
 
-# Instructions:
-# 1. Put on the glove
-# 2. Press the button to start recording
-# 3. Perform the sign (1-2 seconds)
-# 4. Release the button to stop
-# 5. Label the recording when prompted
-2. Train the Model
-bash
+**Instructions:**
+1. Put on the glove
+2. Press the button to start recording
+3. Perform the sign (1-2 seconds)
+4. Release the button to stop
+5. Label the recording when prompted
+
+### 2. Train the Model
+
+```bash
 # Preprocess collected data
 python src/data_preprocessing.py --input data/raw/ --output data/processed/
 
@@ -327,18 +453,29 @@ python src/model_training.py --model xgboost --tune --output models/
 
 # Evaluate model performance
 python src/model_evaluation.py --model models/xgboost_model.pkl --test data/processed/test.csv
-3. Real-time Recognition
-bash
+```
+
+### 3. Real-time Recognition
+
+```bash
 # Run real-time recognition on ESP32
 # (Firmware runs automatically on power-up)
 
 # Or run simulation on PC
 python src/inference.py --model models/xgboost_model.pkl --port COM3
-4. Convert Model for ESP32
-bash
+```
+
+### 4. Convert Model for ESP32
+
+```bash
 python src/convert_to_c.py --model models/xgboost_model.pkl --output esp32_firmware/model_data.c
-📁 Repository Structure
-text
+```
+
+---
+
+## 📁 Repository Structure
+
+```
 bengali-sign-language-recognition/
 │
 ├── data/
@@ -396,49 +533,64 @@ bengali-sign-language-recognition/
 ├── README.md
 ├── LICENSE
 └── CONTRIBUTING.md
-🔬 Future Work
-Short-term Goals
-Expand vocabulary to 50+ words
+```
 
-Add two-hand gesture support
+---
 
-Improve accuracy to 95%+
+## 📖 Documentation
 
-Reduce response time to <2 seconds
+| Document | Description |
+|----------|-------------|
+| [Hardware Schematic](docs/hardware_schematic.pdf) | Circuit diagram and wiring details |
+| [Sensor Calibration](docs/sensor_calibration.pdf) | How to calibrate flex sensors and IMU |
+| [User Manual](docs/user_manual.pdf) | Step-by-step user guide |
+| [Project Report](docs/project_report.pdf) | Detailed research paper |
 
-Long-term Goals
-Support all 732 signs in BaSL dictionary
+---
 
-Facial expression integration for emotional context
+## 🔬 Future Work
 
-Mobile app with Bluetooth connectivity
+### Short-term Goals
 
-Cloud dashboard for analytics
+- [ ] Expand vocabulary to 50+ words
+- [ ] Add two-hand gesture support
+- [ ] Improve accuracy to 95%+
+- [ ] Reduce response time to <2 seconds
 
-Custom training for new signs
+### Long-term Goals
 
-Real-time Bangla text/speech translation
+- [ ] Support all 732 signs in BaSL dictionary
+- [ ] Facial expression integration for emotional context
+- [ ] Mobile app with Bluetooth connectivity
+- [ ] Cloud dashboard for analytics
+- [ ] Custom training for new signs
+- [ ] Real-time Bangla text/speech translation
+- [ ] 8+ hours battery life with power optimization
 
-8+ hours battery life with power optimization
+---
 
-🤝 Contributing
-We welcome contributions! Please see CONTRIBUTING.md for details.
+## 🤝 Contributing
 
-Ways to Contribute
-🐛 Report bugs
+We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
-💡 Suggest features
+### Ways to Contribute
 
-📊 Add more data
+<table>
+  <tr>
+    <td align="center">🐛 Report bugs</td>
+    <td align="center">💡 Suggest features</td>
+    <td align="center">📊 Add more data</td>
+  </tr>
+  <tr>
+    <td align="center">🔧 Improve model accuracy</td>
+    <td align="center">🌐 Translate documentation</td>
+    <td align="center">📝 Write tutorials</td>
+  </tr>
+</table>
 
-🔧 Improve model accuracy
+### Development Setup
 
-🌐 Translate documentation
-
-📝 Write tutorials
-
-Development Setup
-bash
+```bash
 # Fork and clone the repository
 git clone https://github.com/yourusername/bengali-sign-language-recognition.git
 cd bengali-sign-language-recognition
@@ -456,53 +608,70 @@ pytest tests/
 # Check code style
 flake8 src/
 black src/
-📄 License
-This project is licensed under the MIT License - see the LICENSE file for details.
+```
 
-🙏 Acknowledgments
-East West University, Bangladesh - Research support
+---
 
-Bangladesh Bureau of Statistics - Disability statistics
+## 📄 License
 
-Bangladesh National Federation of the Deaf - Sign language guidance
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-Open Source Community - XGBoost, scikit-learn, TensorFlow
+---
 
-TinyML Community - Edge AI deployment guidance
+## 🙏 Acknowledgments
 
-📧 Contact
-Project Lead: [Your Name]
+- **Ahsanullah Univeersity of Science & Technology, Bangladesh** - Research support
+- **Bangladesh Bureau of Statistics** - Disability statistics
+- **Bangladesh National Federation of the Deaf** - Sign language guidance
+- **Open Source Community** - XGBoost, scikit-learn, TensorFlow
+- **TinyML Community** - Edge AI deployment guidance
 
-Email: your.email@example.com
+---
 
-GitHub: github.com/yourusername
+## 📧 Contact
 
-LinkedIn: linkedin.com/in/yourprofile
+<div align="center">
 
-Support & Discussions
-GitHub Issues: github.com/yourusername/bengali-sign-language-recognition/issues
+**Project Lead:** [Your Name](https://yourwebsite.com)
 
-Discussions: github.com/yourusername/bengali-sign-language-recognition/discussions
+[![Email](https://img.shields.io/badge/Email-your.email@example.com-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:your.email@example.com)
+[![GitHub](https://img.shields.io/badge/GitHub-yourusername-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/yourusername)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-yourprofile-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/yourprofile)
 
-📚 References
-Begum, H., et al. (2024). "AI-Based Sensory Glove System to Recognize Bengali Sign Language." IEEE Access, 12, 144997-145014.
+**Support & Discussions**
 
-Bangladesh Bureau of Statistics (2021). National Survey on Persons with Disabilities.
+[![GitHub Issues](https://img.shields.io/badge/GitHub_Issues-Report_Bug-FF6600?style=for-the-badge&logo=github&logoColor=white)](https://github.com/yourusername/bengali-sign-language-recognition/issues)
+[![Discussions](https://img.shields.io/badge/Discussions-Ask_Question-00BFFF?style=for-the-badge&logo=github&logoColor=white)](https://github.com/yourusername/bengali-sign-language-recognition/discussions)
 
-National Center for Special Education (1994). Bangla Sign Language Dictionary.
+</div>
 
-Chen, T., & Guestrin, C. (2016). "XGBoost: A Scalable Tree Boosting System." KDD.
+---
 
-TensorFlow Lite for Microcontrollers. (2024). Edge ML Deployment Guide.
+## 📚 References
 
-📊 Project Status
-Phase	Status	Completion
-Hardware Design	✅ Complete	100%
-Data Collection	✅ Complete	100%
-Model Development	✅ Complete	100%
-ESP32 Deployment	✅ Complete	100%
-Testing & Validation	✅ Complete	100%
-Documentation	✅ Complete	100%
+1. Begum, H., et al. (2024). "AI-Based Sensory Glove System to Recognize Bengali Sign Language." IEEE Access, 12, 144997-145014.
+2. Bangladesh Bureau of Statistics (2021). National Survey on Persons with Disabilities.
+3. National Center for Special Education (1994). Bangla Sign Language Dictionary.
+4. Chen, T., & Guestrin, C. (2016). "XGBoost: A Scalable Tree Boosting System." KDD.
+5. TensorFlow Lite for Microcontrollers. (2024). Edge ML Deployment Guide.
 
+---
 
+## 📊 Project Status
 
+| Phase | Status | Completion |
+|-------|--------|------------|
+| Hardware Design | ✅ Complete | 100% |
+| Data Collection | ✅ Complete | 100% |
+| Model Development | ✅ Complete | 100% |
+| ESP32 Deployment | ✅ Complete | 100% |
+| Testing & Validation | ✅ Complete | 100% |
+| Documentation | ✅ Complete | 100% |
+
+<div align="center">
+
+**Made with ❤️ for the Speech-Disabled Community of Bangladesh**
+
+[⬆ Back to Top](#-ai-powered-bengali-sign-language-recognition-system)
+
+</div>
