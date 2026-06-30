@@ -1,0 +1,24 @@
+Dataset Info:
+Total entries: 4400
+Unique samples: 220
+Unique labels: 11
+Samples per label:
+label
+achen        20
+achi         20
+ami          20
+apnar        20
+apni         20
+dhonnobad    20
+kemon        20
+kii          20
+naam         20
+salam        20
+valo         20
+Name: sample_id, dtype: int64
+
+Unique words: ['achen' 'achi' 'ami' 'apnar' 'apni' 'dhonnobad' 'kemon' 'kii' 'naam'
+ 'salam' 'valo']
+Number of words: 11
+
+
